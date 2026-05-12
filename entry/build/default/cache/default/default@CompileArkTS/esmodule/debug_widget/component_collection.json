@@ -1,0 +1,12 @@
+{
+  "entry\\src\\main\\ets\\calc\\pages\\CardCalc.ets": [
+    "Column",
+    "Stack",
+    "Text",
+    "Row",
+    "ForEach",
+    "Button",
+    "Image",
+    "If"
+  ]
+}

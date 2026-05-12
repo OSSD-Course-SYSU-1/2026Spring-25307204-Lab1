@@ -1,0 +1,1 @@
+E:/OSSD/calculator-master/entry/build/default/cache/default/default@CompileArkTS/esmodule/debug_widget/entry/src/main/ets/calc/pages/CardCalc.ts;com.samples.arktscalc/entry/ets/calc/pages/CardCalc;esm;entry|entry|1.0.0|src/main/ets/calc/pages/CardCalc.ts;entry;false;ets
