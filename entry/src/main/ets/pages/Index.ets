@@ -22,121 +22,150 @@ struct Index {
 
   build() {
     Column() {
-      Stack({ alignContent: Alignment.End }) {
+      Column() {
         Text(this.expression)
+          .width('100%')
+          .height(50)
+          .fontSize(28)
+          .fontColor('#333333')
+          .textAlign(TextAlign.End)
           .maxLines(1)
-          .opacity(0.38)
-          .textAlign(TextAlign.Start)
-          .fontSize('30')
+          .textOverflow({ overflow: TextOverflow.Ellipsis })
+          .padding({ right: 20 })
       }
-      .padding(1)
       .width('100%')
-      .height('20%')
+      .height('18%')
+      .justifyContent(FlexAlign.End)
+      .padding({ bottom: 10 })
 
-      Row() {
-        ForEach(calcButton1(), (item: ImageList, index: number) => {
-          Button({ type: ButtonType.Normal }) {
-            Image(item.image)
-              .height('100%')
-              .aspectRatio(1)
-              .objectFit(ImageFit.Contain)
-          }
-          .width('25%')
-          .borderRadius(20)
-          .backgroundColor(index < 3 ? '#33007DFF' : '#F0F0F0')
-          .onClick(() => {
-            this.onInputValue(item.value);
+      Column() {
+        Row() {
+          ForEach(calcButton1(), (item: ImageList, index: number) => {
+            Button({ type: ButtonType.Normal }) {
+              Image(item.image)
+                .width(40)
+                .height(40)
+                .objectFit(ImageFit.Contain)
+            }
+            .width(60)
+            .height(60)
+            .borderRadius(12)
+            .backgroundColor(this.getButtonColor(index, 1))
+            .onClick(() => {
+              this.onInputValue(item.value);
+            })
           })
-        })
-      }
-      .height('16%')
-      .width('100%')
+        }
+        .width('100%')
+        .height(60)
+        .justifyContent(FlexAlign.SpaceEvenly)
+        .margin({ top: 8, bottom: 8 })
 
-      Row() {
-        ForEach(calcButton2(), (item: ImageList, index: number) => {
-          Button({ type: ButtonType.Normal }) {
-            Image(item.image)
-              .height('100%')
-              .aspectRatio(item.value === '0' ? 2.5 : 1)
-              .objectFit(ImageFit.Contain)
-          }
-          .width('25%')
-          .height('100%')
-          .borderRadius(20)
-          .backgroundColor(index < 3 ? '#33007DFF' : '#F0F0F0')
-          .onClick(() => {
-            this.onInputValue(item.value);
+        Row() {
+          ForEach(calcButton2(), (item: ImageList, index: number) => {
+            Button({ type: ButtonType.Normal }) {
+              Image(item.image)
+                .width(40)
+                .height(40)
+                .objectFit(ImageFit.Contain)
+            }
+            .width(60)
+            .height(60)
+            .borderRadius(12)
+            .backgroundColor(this.getButtonColor(index, 2))
+            .onClick(() => {
+              this.onInputValue(item.value);
+            })
           })
-        })
-      }
-      .padding(1)
-      .width('100%')
-      .height('16%')
+        }
+        .width('100%')
+        .height(60)
+        .justifyContent(FlexAlign.SpaceEvenly)
+        .margin({ top: 8, bottom: 8 })
 
-      Row() {
-        ForEach(calcButton3(), (item: ImageList, index: number) => {
-          Button({ type: ButtonType.Normal }) {
-            Image(item.image)
-              .height('100%')
-              .aspectRatio(item.value === '0' ? 2.5 : 1)
-              .objectFit(ImageFit.Contain)
-          }
-          .width('25%')
-          .height('100%')
-          .borderRadius(20)
-          .backgroundColor(index < 3 ? '#33007DFF' : '#F0F0F0')
-          .onClick(() => {
-            this.onInputValue(item.value);
+        Row() {
+          ForEach(calcButton3(), (item: ImageList, index: number) => {
+            Button({ type: ButtonType.Normal }) {
+              Image(item.image)
+                .width(40)
+                .height(40)
+                .objectFit(ImageFit.Contain)
+            }
+            .width(60)
+            .height(60)
+            .borderRadius(12)
+            .backgroundColor(this.getButtonColor(index, 3))
+            .onClick(() => {
+              this.onInputValue(item.value);
+            })
           })
-        })
-      }
-      .padding(1)
-      .width('100%')
-      .height('16%')
+        }
+        .width('100%')
+        .height(60)
+        .justifyContent(FlexAlign.SpaceEvenly)
+        .margin({ top: 8, bottom: 8 })
 
-      Row() {
-        ForEach(calcButton4(), (item: ImageList, index: number) => {
-          Button({ type: ButtonType.Normal }) {
-            Image(item.image)
-              .height('100%')
-              .aspectRatio(1)
-              .objectFit(ImageFit.Contain)
-          }
-          .width('25%')
-          .height('100%')
-          .borderRadius(20)
-          .backgroundColor(index < 3 ? '#33007DFF' : '#F0F0F0')
-          .onClick(() => {
-            this.onInputValue(item.value);
+        Row() {
+          ForEach(calcButton4(), (item: ImageList, index: number) => {
+            Button({ type: ButtonType.Normal }) {
+              Image(item.image)
+                .width(40)
+                .height(40)
+                .objectFit(ImageFit.Contain)
+            }
+            .width(60)
+            .height(60)
+            .borderRadius(12)
+            .backgroundColor(this.getButtonColor(index, 4))
+            .onClick(() => {
+              this.onInputValue(item.value);
+            })
           })
-        })
-      }
-      .padding(1)
-      .width('100%')
-      .height('16%')
+        }
+        .width('100%')
+        .height(60)
+        .justifyContent(FlexAlign.SpaceEvenly)
+        .margin({ top: 8, bottom: 8 })
 
-      Row() {
-        ForEach(calcButton5(), (item: ImageList, index: number) => {
+        Row() {
           Button({ type: ButtonType.Normal }) {
-            Image(item.image)
-              .height('100%')
-              .aspectRatio(1)
+            Image($r('app.media.ic_cal_equal'))
+              .width(40)
+              .height(40)
               .objectFit(ImageFit.Contain)
           }
           .width('100%')
-          .height('100%')
-          .borderRadius(20)
-          .backgroundColor(index < 3 ? '#33007DFF' : '#F0F0F0')
-          .align(Alignment.Center)
+          .height(60)
+          .borderRadius(12)
+          .backgroundColor('#007DFF')
           .onClick(() => {
-            this.onInputValue(item.value);
+            this.onInputValue('=');
           })
-        })
+        }
+        .width('100%')
+        .padding({ left: 16, right: 16 })
+        .margin({ top: 8, bottom: 16 })
       }
-      .padding(1)
       .width('100%')
-      .height('16%')
+      .layoutWeight(1)
+      .justifyContent(FlexAlign.Start)
     }
+    .width('100%')
+    .height('100%')
+    .backgroundColor('#F5F5F5')
+  }
+
+  getButtonColor(index: number, row: number): string {
+    if (index === 0) {
+      return '#FF9500';
+    }
+    if (row === 4) {
+      return '#333333';
+    }
+    if (index < 4) {
+      return '#505050';
+    }
+    return '#007DFF';
   }
 
   aboutToAppear() {
@@ -160,7 +189,6 @@ struct Index {
   }
 
   onInputValue = (value: string) => {
-    // When a user clicks the C button, the expression and operation result return to 0.
     if (value === 'C') {
       this.expression = '';
       this.result = '';
@@ -171,6 +199,31 @@ struct Index {
       if (!this.expression.length) {
         this.result = '';
       }
+    } else if (value === 'sqrt') {
+      if (this.expression.length > 0) {
+        const num = Number.parseFloat(calc(this.expression));
+        if (num >= 0) {
+          const sqrtResult = Math.sqrt(num);
+          this.expression = sqrtResult.toFixed(10).replace(/\.?0+$/, '');
+          this.result = '';
+        } else {
+          this.result = 'Error';
+        }
+      }
+    } else if (value === 'ln') {
+      if (this.expression.length > 0) {
+        const num = Number.parseFloat(calc(this.expression));
+        if (num > 0) {
+          const lnResult = Math.log(num);
+          this.expression = lnResult.toFixed(10).replace(/\.?0+$/, '');
+          this.result = '';
+        } else {
+          this.result = 'Error';
+        }
+      }
+    } else if (value === 'pi') {
+      this.expression += Math.PI.toFixed(10).replace(/\.?0+$/, '');
+      this.result = calc(this.expression);
     } else if (isOperator(value)) {
       let size = this.expression.length;
       if (size) {
@@ -204,6 +257,7 @@ interface ImageList {
 function calcButton1(): Array<ImageList> {
   let list: Array<ImageList> =
     [
+      { image: $r('app.media.ic_cal_sqrt'), value: 'sqrt' },
       { image: $r('app.media.ic_cal_delete_c'), value: 'C' },
       { image: $r('app.media.ic_cal_division'), value: '/' },
       { image: $r('app.media.ic_cal_multiply'), value: '*' },
@@ -215,6 +269,7 @@ function calcButton1(): Array<ImageList> {
 function calcButton2(): Array<ImageList> {
   let list: Array<ImageList> =
     [
+      { image: $r('app.media.ic_cal_ln'), value: 'ln' },
       { image: $r('app.media.ic_cal_seven'), value: '7' },
       { image: $r('app.media.ic_cal_eight'), value: '8' },
       { image: $r('app.media.ic_cal_nine'), value: '9' },
@@ -226,6 +281,7 @@ function calcButton2(): Array<ImageList> {
 function calcButton3(): Array<ImageList> {
   let list: Array<ImageList> =
     [
+      { image: $r('app.media.ic_cal_pi'), value: 'pi' },
       { image: $r('app.media.ic_cal_four'), value: '4' },
       { image: $r('app.media.ic_cal_five'), value: '5' },
       { image: $r('app.media.ic_cal_six'), value: '6' },
@@ -241,15 +297,7 @@ function calcButton4(): Array<ImageList> {
       { image: $r('app.media.ic_cal_two'), value: '2' },
       { image: $r('app.media.ic_cal_three'), value: '3' },
       { image: $r("app.media.ic_cal_zero"), value: '0' },
-
-    ]
-  return list;
-}
-
-function calcButton5(): Array<ImageList> {
-  let list: Array<ImageList> =
-    [
-      { image: $r('app.media.ic_cal_equal'), value: '=' }
+      { image: $r('app.media.ic_cal_point'), value: '.' },
     ]
   return list;
 }

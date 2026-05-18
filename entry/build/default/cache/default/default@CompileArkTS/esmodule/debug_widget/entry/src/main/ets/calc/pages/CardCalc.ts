@@ -30,7 +30,6 @@ class CardCalc extends ViewPU {
         this.__result = new ObservedPropertySimplePU('', this, "result");
         this.__expression = new ObservedPropertySimplePU('', this, "expression");
         this.onInputValue = (value: string) => {
-            // When a user clicks the C button, the expression and operation result return to 0.
             if (value === 'C') {
                 this.expression = '';
                 this.result = '';
@@ -42,6 +41,36 @@ class CardCalc extends ViewPU {
                 if (!this.expression.length) {
                     this.result = '';
                 }
+            }
+            else if (value === 'sqrt') {
+                if (this.expression.length > 0) {
+                    const num = Number.parseFloat(calc(this.expression));
+                    if (num >= 0) {
+                        const sqrtResult = Math.sqrt(num);
+                        this.expression = sqrtResult.toFixed(10).replace(/\.?0+$/, '');
+                        this.result = '';
+                    }
+                    else {
+                        this.result = 'Error';
+                    }
+                }
+            }
+            else if (value === 'ln') {
+                if (this.expression.length > 0) {
+                    const num = Number.parseFloat(calc(this.expression));
+                    if (num > 0) {
+                        const lnResult = Math.log(num);
+                        this.expression = lnResult.toFixed(10).replace(/\.?0+$/, '');
+                        this.result = '';
+                    }
+                    else {
+                        this.result = 'Error';
+                    }
+                }
+            }
+            else if (value === 'pi') {
+                this.expression += Math.PI.toFixed(10).replace(/\.?0+$/, '');
+                this.result = calc(this.expression);
             }
             else if (isOperator(value)) {
                 let size = this.expression.length;
@@ -111,26 +140,42 @@ class CardCalc extends ViewPU {
     initialRender() {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Column.create();
+            Column.width('100%');
+            Column.height('100%');
+            Column.backgroundColor('#F5F5F5');
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Stack.create({ alignContent: Alignment.End });
-            Stack.padding(1);
-            Stack.width('100%');
-            Stack.height('20%');
-        }, Stack);
+            Column.create();
+            Column.width('100%');
+            Column.height('18%');
+            Column.justifyContent(FlexAlign.End);
+            Column.padding({ bottom: 10 });
+        }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create(this.expression);
+            Text.width('100%');
+            Text.height(50);
+            Text.fontSize(28);
+            Text.fontColor('#333333');
+            Text.textAlign(TextAlign.End);
             Text.maxLines(1);
-            Text.opacity(0.38);
-            Text.textAlign(TextAlign.Start);
-            Text.fontSize('30');
+            Text.textOverflow({ overflow: TextOverflow.Ellipsis });
+            Text.padding({ right: 20 });
         }, Text);
         Text.pop();
-        Stack.pop();
+        Column.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create();
+            Column.width('100%');
+            Column.layoutWeight(1);
+            Column.justifyContent(FlexAlign.Start);
+        }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Row.create();
-            Row.height('16%');
             Row.width('100%');
+            Row.height(60);
+            Row.justifyContent(FlexAlign.SpaceEvenly);
+            Row.margin({ top: 8, bottom: 8 });
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             ForEach.create();
@@ -138,17 +183,18 @@ class CardCalc extends ViewPU {
                 const item = _item;
                 this.observeComponentCreation2((elmtId, isInitialRender) => {
                     Button.createWithChild({ type: ButtonType.Normal });
-                    Button.width('25%');
-                    Button.borderRadius(20);
-                    Button.backgroundColor(index < 3 ? '#33007DFF' : '#F0F0F0');
+                    Button.width(60);
+                    Button.height(60);
+                    Button.borderRadius(12);
+                    Button.backgroundColor(this.getButtonColor(index, 1));
                     Button.onClick(() => {
                         this.onInputValue(item.value);
                     });
                 }, Button);
                 this.observeComponentCreation2((elmtId, isInitialRender) => {
                     Image.create(item.image);
-                    Image.height('100%');
-                    Image.aspectRatio(1);
+                    Image.width(40);
+                    Image.height(40);
                     Image.objectFit(ImageFit.Contain);
                 }, Image);
                 Button.pop();
@@ -159,9 +205,10 @@ class CardCalc extends ViewPU {
         Row.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Row.create();
-            Row.padding(1);
             Row.width('100%');
-            Row.height('16%');
+            Row.height(60);
+            Row.justifyContent(FlexAlign.SpaceEvenly);
+            Row.margin({ top: 8, bottom: 8 });
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             ForEach.create();
@@ -169,18 +216,18 @@ class CardCalc extends ViewPU {
                 const item = _item;
                 this.observeComponentCreation2((elmtId, isInitialRender) => {
                     Button.createWithChild({ type: ButtonType.Normal });
-                    Button.width('25%');
-                    Button.height('100%');
-                    Button.borderRadius(20);
-                    Button.backgroundColor(index < 3 ? '#33007DFF' : '#F0F0F0');
+                    Button.width(60);
+                    Button.height(60);
+                    Button.borderRadius(12);
+                    Button.backgroundColor(this.getButtonColor(index, 2));
                     Button.onClick(() => {
                         this.onInputValue(item.value);
                     });
                 }, Button);
                 this.observeComponentCreation2((elmtId, isInitialRender) => {
                     Image.create(item.image);
-                    Image.height('100%');
-                    Image.aspectRatio(item.value === '0' ? 2.5 : 1);
+                    Image.width(40);
+                    Image.height(40);
                     Image.objectFit(ImageFit.Contain);
                 }, Image);
                 Button.pop();
@@ -191,9 +238,10 @@ class CardCalc extends ViewPU {
         Row.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Row.create();
-            Row.padding(1);
             Row.width('100%');
-            Row.height('16%');
+            Row.height(60);
+            Row.justifyContent(FlexAlign.SpaceEvenly);
+            Row.margin({ top: 8, bottom: 8 });
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             ForEach.create();
@@ -201,18 +249,18 @@ class CardCalc extends ViewPU {
                 const item = _item;
                 this.observeComponentCreation2((elmtId, isInitialRender) => {
                     Button.createWithChild({ type: ButtonType.Normal });
-                    Button.width('25%');
-                    Button.height('100%');
-                    Button.borderRadius(20);
-                    Button.backgroundColor(index < 3 ? '#33007DFF' : '#F0F0F0');
+                    Button.width(60);
+                    Button.height(60);
+                    Button.borderRadius(12);
+                    Button.backgroundColor(this.getButtonColor(index, 3));
                     Button.onClick(() => {
                         this.onInputValue(item.value);
                     });
                 }, Button);
                 this.observeComponentCreation2((elmtId, isInitialRender) => {
                     Image.create(item.image);
-                    Image.height('100%');
-                    Image.aspectRatio(item.value === '0' ? 2.5 : 1);
+                    Image.width(40);
+                    Image.height(40);
                     Image.objectFit(ImageFit.Contain);
                 }, Image);
                 Button.pop();
@@ -223,9 +271,10 @@ class CardCalc extends ViewPU {
         Row.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Row.create();
-            Row.padding(1);
             Row.width('100%');
-            Row.height('16%');
+            Row.height(60);
+            Row.justifyContent(FlexAlign.SpaceEvenly);
+            Row.margin({ top: 8, bottom: 8 });
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             ForEach.create();
@@ -233,18 +282,18 @@ class CardCalc extends ViewPU {
                 const item = _item;
                 this.observeComponentCreation2((elmtId, isInitialRender) => {
                     Button.createWithChild({ type: ButtonType.Normal });
-                    Button.width('25%');
-                    Button.height('100%');
-                    Button.borderRadius(20);
-                    Button.backgroundColor(index < 3 ? '#33007DFF' : '#F0F0F0');
+                    Button.width(60);
+                    Button.height(60);
+                    Button.borderRadius(12);
+                    Button.backgroundColor(this.getButtonColor(index, 4));
                     Button.onClick(() => {
                         this.onInputValue(item.value);
                     });
                 }, Button);
                 this.observeComponentCreation2((elmtId, isInitialRender) => {
                     Image.create(item.image);
-                    Image.height('100%');
-                    Image.aspectRatio(1);
+                    Image.width(40);
+                    Image.height(40);
                     Image.objectFit(ImageFit.Contain);
                 }, Image);
                 Button.pop();
@@ -255,38 +304,42 @@ class CardCalc extends ViewPU {
         Row.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Row.create();
-            Row.padding(1);
             Row.width('100%');
-            Row.height('16%');
+            Row.padding({ left: 16, right: 16 });
+            Row.margin({ top: 8, bottom: 16 });
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            ForEach.create();
-            const forEachItemGenFunction = (_item, index: number) => {
-                const item = _item;
-                this.observeComponentCreation2((elmtId, isInitialRender) => {
-                    Button.createWithChild({ type: ButtonType.Normal });
-                    Button.width('100%');
-                    Button.height('100%');
-                    Button.borderRadius(20);
-                    Button.backgroundColor(index < 3 ? '#33007DFF' : '#F0F0F0');
-                    Button.align(Alignment.Center);
-                    Button.onClick(() => {
-                        this.onInputValue(item.value);
-                    });
-                }, Button);
-                this.observeComponentCreation2((elmtId, isInitialRender) => {
-                    Image.create(item.image);
-                    Image.height('100%');
-                    Image.aspectRatio(1);
-                    Image.objectFit(ImageFit.Contain);
-                }, Image);
-                Button.pop();
-            };
-            this.forEachUpdateFunction(elmtId, calcButton5(), forEachItemGenFunction, undefined, true, false);
-        }, ForEach);
-        ForEach.pop();
+            Button.createWithChild({ type: ButtonType.Normal });
+            Button.width('100%');
+            Button.height(60);
+            Button.borderRadius(12);
+            Button.backgroundColor('#007DFF');
+            Button.onClick(() => {
+                this.onInputValue('=');
+            });
+        }, Button);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Image.create({ "id": 16777232, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" });
+            Image.width(40);
+            Image.height(40);
+            Image.objectFit(ImageFit.Contain);
+        }, Image);
+        Button.pop();
         Row.pop();
         Column.pop();
+        Column.pop();
+    }
+    getButtonColor(index: number, row: number): string {
+        if (index === 0) {
+            return '#FF9500';
+        }
+        if (row === 4) {
+            return '#333333';
+        }
+        if (index < 4) {
+            return '#505050';
+        }
+        return '#007DFF';
     }
     aboutToAppear() {
         console.error("ArkTSForm aboutToAppear");
@@ -317,43 +370,41 @@ interface ImageList {
 }
 function calcButton1(): Array<ImageList> {
     let list: Array<ImageList> = [
+        { image: { "id": 16777246, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: 'sqrt' },
         { image: { "id": 16777229, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: 'C' },
         { image: { "id": 16777230, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '/' },
-        { image: { "id": 16777236, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '*' },
+        { image: { "id": 16777237, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '*' },
         { image: { "id": 16777228, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '' },
     ];
     return list;
 }
 function calcButton2(): Array<ImageList> {
     let list: Array<ImageList> = [
-        { image: { "id": 16777242, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '7' },
+        { image: { "id": 16777235, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: 'ln' },
+        { image: { "id": 16777244, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '7' },
         { image: { "id": 16777231, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '8' },
-        { image: { "id": 16777237, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '9' },
-        { image: { "id": 16777235, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '-' },
+        { image: { "id": 16777238, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '9' },
+        { image: { "id": 16777236, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '-' },
     ];
     return list;
 }
 function calcButton3(): Array<ImageList> {
     let list: Array<ImageList> = [
+        { image: { "id": 16777241, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: 'pi' },
         { image: { "id": 16777234, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '4' },
         { image: { "id": 16777233, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '5' },
-        { image: { "id": 16777243, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '6' },
-        { image: { "id": 16777240, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '+' },
+        { image: { "id": 16777245, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '6' },
+        { image: { "id": 16777242, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '+' },
     ];
     return list;
 }
 function calcButton4(): Array<ImageList> {
     let list: Array<ImageList> = [
-        { image: { "id": 16777238, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '1' },
-        { image: { "id": 16777245, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '2' },
-        { image: { "id": 16777244, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '3' },
-        { image: { "id": 16777246, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '0' },
-    ];
-    return list;
-}
-function calcButton5(): Array<ImageList> {
-    let list: Array<ImageList> = [
-        { image: { "id": 16777232, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '=' }
+        { image: { "id": 16777239, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '1' },
+        { image: { "id": 16777248, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '2' },
+        { image: { "id": 16777247, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '3' },
+        { image: { "id": 16777249, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '0' },
+        { image: { "id": 16777243, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '.' },
     ];
     return list;
 }

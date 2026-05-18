@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="93px" height="93px" viewBox="0 0 93 93" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>ic_cal_pi</title>
+    <g id="calculator" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="分布式计算器_A端_计算器首页" transform="translate(0.000000, 0.000000)" fill="#007DFF">
+            <g id="ic_cal_pi" transform="translate(0.000000, 0.000000)">
+                <rect id="background" fill-opacity="0" x="0" y="0" width="93" height="93" rx="21"></rect>
+                <g id="pi_symbol" transform="translate(22.000000, 27.000000)">
+                    <rect id="top_bar" x="0" y="0" width="50" height="5" rx="2"></rect>
+                    <rect id="left_leg" x="8" y="0" width="5" height="40" rx="2"></rect>
+                    <rect id="right_leg" x="37" y="0" width="5" height="40" rx="2"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
