@@ -19,6 +19,10 @@
     {
       "name": "EntryFormAbility_label",
       "value": "form_label"
+    },
+    {
+      "name": "permission_reason_distributed",
+      "value": "允许计算器在设备间接续使用"
     }
   ]
 }

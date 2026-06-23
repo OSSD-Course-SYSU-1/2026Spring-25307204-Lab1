@@ -15,16 +15,31 @@
 import { UIAbility , Want ,AbilityConstant } from '@kit.AbilityKit';
 import { window  } from '@kit.ArkUI';
 import Logger from '../model/Logger';
+import { ContinuationManager, WantParam } from 'common';
 
 const TAG: string = 'EntryAbility';
 
 export default class EntryAbility extends UIAbility {
+  private continuationManager: ContinuationManager = ContinuationManager.getInstance();
+
   onCreate(want: Want, launchParam: AbilityConstant.LaunchParam) {
     Logger.info(TAG, 'EntryAbility onCreate');
+    this.continuationManager.onCreate(want, launchParam);
   }
 
   onDestroy(): void {
     Logger.info(TAG, 'EntryAbility onDestroy');
+    this.continuationManager.destroy();
+  }
+
+  onContinue(wantParam: WantParam): number {
+    Logger.info(TAG, 'EntryAbility onContinue');
+    return this.continuationManager.onContinue(wantParam);
+  }
+
+  onNewWant(want: Want, launchParam: AbilityConstant.LaunchParam): void {
+    Logger.info(TAG, 'EntryAbility onNewWant');
+    this.continuationManager.onNewWant(want, launchParam);
   }
 
   onWindowStageCreate(windowStage: window.WindowStage): void {

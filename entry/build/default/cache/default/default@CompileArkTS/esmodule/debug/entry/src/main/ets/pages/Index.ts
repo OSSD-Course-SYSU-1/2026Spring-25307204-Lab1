@@ -4,22 +4,12 @@ if (!("finalizeConstruction" in ViewPU.prototype)) {
 interface Index_Params {
     result?: string;
     expression?: string;
+    stateManager?: StateManager;
+    stateCallback?: (state: CalculatorState) => void;
     onInputValue?;
 }
-/*
- * Copyright (c) 2023 Huawei Device Co., Ltd.
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+import { StateManager } from "@bundle:com.samples.arktscalc/entry@common/index";
+import type { CalculatorState } from "@bundle:com.samples.arktscalc/entry@common/index";
 let storage = new LocalStorage();
 class Index extends ViewPU {
     constructor(parent, params, __localStorage, elmtId = -1, paramsLambda = undefined, extraInfo) {
@@ -29,10 +19,17 @@ class Index extends ViewPU {
         }
         this.__result = new ObservedPropertySimplePU('', this, "result");
         this.__expression = new ObservedPropertySimplePU('', this, "expression");
+        this.stateManager = StateManager.getInstance();
+        this.stateCallback = (state: CalculatorState) => {
+            this.expression = state.expression;
+            this.result = state.result;
+        };
         this.onInputValue = (value: string) => {
             if (value === 'C') {
                 this.expression = '';
                 this.result = '';
+                this.stateManager.updateExpression('');
+                this.stateManager.updateResult('');
                 return;
             }
             else if (value === '') {
@@ -41,6 +38,8 @@ class Index extends ViewPU {
                 if (!this.expression.length) {
                     this.result = '';
                 }
+                this.stateManager.updateExpression(this.expression);
+                this.stateManager.updateResult(this.result);
             }
             else if (value === 'sqrt') {
                 if (this.expression.length > 0) {
@@ -49,9 +48,12 @@ class Index extends ViewPU {
                         const sqrtResult = Math.sqrt(num);
                         this.expression = sqrtResult.toFixed(10).replace(/\.?0+$/, '');
                         this.result = '';
+                        this.stateManager.updateExpression(this.expression);
+                        this.stateManager.updateResult('');
                     }
                     else {
                         this.result = 'Error';
+                        this.stateManager.updateResult('Error');
                     }
                 }
             }
@@ -62,15 +64,20 @@ class Index extends ViewPU {
                         const lnResult = Math.log(num);
                         this.expression = lnResult.toFixed(10).replace(/\.?0+$/, '');
                         this.result = '';
+                        this.stateManager.updateExpression(this.expression);
+                        this.stateManager.updateResult('');
                     }
                     else {
                         this.result = 'Error';
+                        this.stateManager.updateResult('Error');
                     }
                 }
             }
             else if (value === 'pi') {
                 this.expression += Math.PI.toFixed(10).replace(/\.?0+$/, '');
                 this.result = calc(this.expression);
+                this.stateManager.updateExpression(this.expression);
+                this.stateManager.updateResult(this.result);
             }
             else if (isOperator(value)) {
                 let size = this.expression.length;
@@ -84,17 +91,22 @@ class Index extends ViewPU {
                     return;
                 }
                 this.expression += value;
+                this.stateManager.updateExpression(this.expression);
             }
             else if (value === '=') {
                 this.result = calc(this.expression);
                 if (this.result !== '' && this.result !== undefined) {
                     this.expression = this.result;
                     this.result = '';
+                    this.stateManager.updateExpression(this.expression);
+                    this.stateManager.updateResult('');
                 }
             }
             else {
                 this.expression += value;
                 this.result = calc(this.expression);
+                this.stateManager.updateExpression(this.expression);
+                this.stateManager.updateResult(this.result);
             }
         };
         this.setInitiallyProvidedValue(params);
@@ -106,6 +118,12 @@ class Index extends ViewPU {
         }
         if (params.expression !== undefined) {
             this.expression = params.expression;
+        }
+        if (params.stateManager !== undefined) {
+            this.stateManager = params.stateManager;
+        }
+        if (params.stateCallback !== undefined) {
+            this.stateCallback = params.stateCallback;
         }
         if (params.onInputValue !== undefined) {
             this.onInputValue = params.onInputValue;
@@ -137,6 +155,8 @@ class Index extends ViewPU {
     set expression(newValue: string) {
         this.__expression.set(newValue);
     }
+    private stateManager: StateManager;
+    private stateCallback: (state: CalculatorState) => void;
     initialRender() {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Column.create();
@@ -319,7 +339,7 @@ class Index extends ViewPU {
             });
         }, Button);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Image.create({ "id": 16777232, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" });
+            Image.create({ "id": 50331665, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" });
             Image.width(40);
             Image.height(40);
             Image.objectFit(ImageFit.Contain);
@@ -343,9 +363,14 @@ class Index extends ViewPU {
     }
     aboutToAppear() {
         console.error("ArkTSForm aboutToAppear");
+        this.stateManager.subscribe(this.stateCallback);
+        const currentState: CalculatorState = this.stateManager.getState();
+        this.expression = currentState.expression;
+        this.result = currentState.result;
     }
     aboutToDisappear() {
         console.error("ArkTSForm aboutToDisappear");
+        this.stateManager.unsubscribe(this.stateCallback);
     }
     onPageShow() {
         console.error("ArkTSForm onPageShow");
@@ -370,41 +395,41 @@ interface ImageList {
 }
 function calcButton1(): Array<ImageList> {
     let list: Array<ImageList> = [
-        { image: { "id": 16777246, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: 'sqrt' },
-        { image: { "id": 16777229, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: 'C' },
-        { image: { "id": 16777230, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '/' },
-        { image: { "id": 16777237, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '*' },
-        { image: { "id": 16777228, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '' },
+        { image: { "id": 50331679, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: 'sqrt' },
+        { image: { "id": 50331662, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: 'C' },
+        { image: { "id": 50331663, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '/' },
+        { image: { "id": 50331670, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '*' },
+        { image: { "id": 50331661, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '' },
     ];
     return list;
 }
 function calcButton2(): Array<ImageList> {
     let list: Array<ImageList> = [
-        { image: { "id": 16777235, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: 'ln' },
-        { image: { "id": 16777244, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '7' },
-        { image: { "id": 16777231, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '8' },
-        { image: { "id": 16777238, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '9' },
-        { image: { "id": 16777236, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '-' },
+        { image: { "id": 50331668, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: 'ln' },
+        { image: { "id": 50331677, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '7' },
+        { image: { "id": 50331664, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '8' },
+        { image: { "id": 50331671, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '9' },
+        { image: { "id": 50331669, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '-' },
     ];
     return list;
 }
 function calcButton3(): Array<ImageList> {
     let list: Array<ImageList> = [
-        { image: { "id": 16777241, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: 'pi' },
-        { image: { "id": 16777234, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '4' },
-        { image: { "id": 16777233, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '5' },
-        { image: { "id": 16777245, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '6' },
-        { image: { "id": 16777242, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '+' },
+        { image: { "id": 50331674, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: 'pi' },
+        { image: { "id": 50331667, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '4' },
+        { image: { "id": 50331666, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '5' },
+        { image: { "id": 50331678, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '6' },
+        { image: { "id": 50331675, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '+' },
     ];
     return list;
 }
 function calcButton4(): Array<ImageList> {
     let list: Array<ImageList> = [
-        { image: { "id": 16777239, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '1' },
-        { image: { "id": 16777248, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '2' },
-        { image: { "id": 16777247, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '3' },
-        { image: { "id": 16777249, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '0' },
-        { image: { "id": 16777243, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '.' },
+        { image: { "id": 50331672, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '1' },
+        { image: { "id": 50331681, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '2' },
+        { image: { "id": 50331680, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '3' },
+        { image: { "id": 50331682, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '0' },
+        { image: { "id": 50331676, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '.' },
     ];
     return list;
 }

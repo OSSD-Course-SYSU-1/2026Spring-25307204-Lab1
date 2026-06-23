@@ -19,6 +19,10 @@
     {
       "name": "EntryFormAbility_label",
       "value": "form_label"
+    },
+    {
+      "name": "permission_reason_distributed",
+      "value": "Allow calculator to continue across devices"
     }
   ]
 }

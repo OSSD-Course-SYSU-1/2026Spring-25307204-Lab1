@@ -1,0 +1,9 @@
+{
+  "name": "common",
+  "version": "1.0.0",
+  "description": "公共工具模块 - 跨平台计算器业务逻辑层",
+  "main": "",
+  "author": "",
+  "license": "Apache License 2.0",
+  "dependencies": {}
+}

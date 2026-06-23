@@ -12,6 +12,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import { StateManager, CalculatorState } from 'common';
+
 let storage = new LocalStorage()
 
 @Entry(storage)
@@ -19,6 +21,11 @@ let storage = new LocalStorage()
 struct Index {
   @State result: string = '';
   @State expression: string = '';
+  private stateManager: StateManager = StateManager.getInstance();
+  private stateCallback: (state: CalculatorState) => void = (state: CalculatorState) => {
+    this.expression = state.expression;
+    this.result = state.result;
+  };
 
   build() {
     Column() {
@@ -170,10 +177,15 @@ struct Index {
 
   aboutToAppear() {
     console.error("ArkTSForm aboutToAppear");
+    this.stateManager.subscribe(this.stateCallback);
+    const currentState: CalculatorState = this.stateManager.getState();
+    this.expression = currentState.expression;
+    this.result = currentState.result;
   }
 
   aboutToDisappear() {
     console.error("ArkTSForm aboutToDisappear");
+    this.stateManager.unsubscribe(this.stateCallback);
   }
 
   onPageShow() {
@@ -192,6 +204,8 @@ struct Index {
     if (value === 'C') {
       this.expression = '';
       this.result = '';
+      this.stateManager.updateExpression('');
+      this.stateManager.updateResult('');
       return;
     } else if (value === '') {
       this.expression = this.expression.substring(0, this.expression.length - 1);
@@ -199,6 +213,8 @@ struct Index {
       if (!this.expression.length) {
         this.result = '';
       }
+      this.stateManager.updateExpression(this.expression);
+      this.stateManager.updateResult(this.result);
     } else if (value === 'sqrt') {
       if (this.expression.length > 0) {
         const num = Number.parseFloat(calc(this.expression));
@@ -206,8 +222,11 @@ struct Index {
           const sqrtResult = Math.sqrt(num);
           this.expression = sqrtResult.toFixed(10).replace(/\.?0+$/, '');
           this.result = '';
+          this.stateManager.updateExpression(this.expression);
+          this.stateManager.updateResult('');
         } else {
           this.result = 'Error';
+          this.stateManager.updateResult('Error');
         }
       }
     } else if (value === 'ln') {
@@ -217,13 +236,18 @@ struct Index {
           const lnResult = Math.log(num);
           this.expression = lnResult.toFixed(10).replace(/\.?0+$/, '');
           this.result = '';
+          this.stateManager.updateExpression(this.expression);
+          this.stateManager.updateResult('');
         } else {
           this.result = 'Error';
+          this.stateManager.updateResult('Error');
         }
       }
     } else if (value === 'pi') {
       this.expression += Math.PI.toFixed(10).replace(/\.?0+$/, '');
       this.result = calc(this.expression);
+      this.stateManager.updateExpression(this.expression);
+      this.stateManager.updateResult(this.result);
     } else if (isOperator(value)) {
       let size = this.expression.length;
       if (size) {
@@ -236,15 +260,20 @@ struct Index {
         return;
       }
       this.expression += value;
+      this.stateManager.updateExpression(this.expression);
     } else if (value === '=') {
       this.result = calc(this.expression)
       if (this.result !== '' && this.result !== undefined) {
         this.expression = this.result;
         this.result = '';
+        this.stateManager.updateExpression(this.expression);
+        this.stateManager.updateResult('');
       }
     } else {
       this.expression += value;
       this.result = calc(this.expression);
+      this.stateManager.updateExpression(this.expression);
+      this.stateManager.updateResult(this.result);
     }
   }
 }

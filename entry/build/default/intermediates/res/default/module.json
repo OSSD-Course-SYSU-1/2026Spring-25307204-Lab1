@@ -17,18 +17,27 @@
 		"bundleType":	"app",
 		"buildMode":	"debug",
 		"debug":	true,
-		"iconId":	16777217,
-		"labelId":	16777216
+		"iconId":	50331649,
+		"labelId":	50331648
 	},
 	"module":	{
 		"name":	"entry",
 		"type":	"entry",
 		"description":	"$string:module_desc",
 		"mainElement":	"EntryAbility",
-		"deviceTypes":	["phone"],
+		"deviceTypes":	["phone", "tablet", "2in1"],
 		"deliveryWithInstall":	true,
 		"installationFree":	false,
 		"pages":	"$profile:main_pages",
+		"requestPermissions":	[{
+				"name":	"ohos.permission.DISTRIBUTED_DATASYNC",
+				"reason":	"$string:permission_reason_distributed",
+				"usedScene":	{
+					"abilities":	["EntryAbility"],
+					"when":	"inuse"
+				},
+				"reasonId":	50331655
+			}],
 		"abilities":	[{
 				"name":	"EntryAbility",
 				"srcEntry":	"./ets/entryability/EntryAbility.ets",
@@ -38,15 +47,17 @@
 				"startWindowIcon":	"$media:icon",
 				"startWindowBackground":	"$color:start_window_background",
 				"exported":	true,
+				"continuable":	true,
+				"launchType":	"specified",
 				"skills":	[{
 						"entities":	["entity.system.home"],
 						"actions":	["action.system.home"]
 					}],
-				"descriptionId":	16777218,
-				"iconId":	16777252,
-				"labelId":	16777219,
-				"startWindowIconId":	16777252,
-				"startWindowBackgroundId":	16777223
+				"descriptionId":	50331650,
+				"iconId":	50331685,
+				"labelId":	50331651,
+				"startWindowIconId":	50331685,
+				"startWindowBackgroundId":	50331656
 			}],
 		"extensionAbilities":	[{
 				"name":	"EntryFormAbility",
@@ -57,15 +68,15 @@
 				"metadata":	[{
 						"name":	"ohos.extension.form",
 						"resource":	"$profile:form_config",
-						"resourceId":	16777254
+						"resourceId":	50331687
 					}],
-				"labelId":	16777221,
-				"descriptionId":	16777220
+				"labelId":	50331653,
+				"descriptionId":	50331652
 			}],
 		"packageName":	"entry",
 		"virtualMachine":	"ark12.0.6.0",
 		"compileMode":	"esmodule",
 		"dependencies":	[],
-		"descriptionId":	16777222
+		"descriptionId":	50331654
 	}
 }

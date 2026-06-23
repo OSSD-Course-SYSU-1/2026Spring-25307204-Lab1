@@ -1,0 +1,9 @@
+{
+  "name": "crossplatform",
+  "version": "1.0.0",
+  "description": "跨平台UI层 - 跨平台计算器UI组件",
+  "main": "",
+  "author": "",
+  "license": "Apache License 2.0",
+  "dependencies": {}
+}

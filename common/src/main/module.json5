@@ -1,0 +1,12 @@
+{
+  "module": {
+    "name": "common",
+    "type": "har",
+    "description": "公共工具模块 - 业务逻辑层",
+    "deviceTypes": [
+      "phone",
+      "tablet",
+      "2in1"
+    ]
+  }
+}

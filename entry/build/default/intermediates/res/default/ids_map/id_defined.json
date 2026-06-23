@@ -2,162 +2,166 @@
 	"record":	[{
 			"type":	"string",
 			"name":	"app_name",
-			"id":	"0x01000000"
+			"id":	"0x03000000"
 		}, {
 			"type":	"media",
 			"name":	"app_icon",
-			"id":	"0x01000001"
+			"id":	"0x03000001"
 		}, {
 			"type":	"string",
 			"name":	"EntryAbility_desc",
-			"id":	"0x01000002"
+			"id":	"0x03000002"
 		}, {
 			"type":	"string",
 			"name":	"EntryAbility_label",
-			"id":	"0x01000003"
+			"id":	"0x03000003"
 		}, {
 			"type":	"string",
 			"name":	"EntryFormAbility_desc",
-			"id":	"0x01000004"
+			"id":	"0x03000004"
 		}, {
 			"type":	"string",
 			"name":	"EntryFormAbility_label",
-			"id":	"0x01000005"
+			"id":	"0x03000005"
 		}, {
 			"type":	"string",
 			"name":	"module_desc",
-			"id":	"0x01000006"
+			"id":	"0x03000006"
+		}, {
+			"type":	"string",
+			"name":	"permission_reason_distributed",
+			"id":	"0x03000007"
 		}, {
 			"type":	"color",
 			"name":	"start_window_background",
-			"id":	"0x01000007"
+			"id":	"0x03000008"
 		}, {
 			"type":	"float",
 			"name":	"font_size",
-			"id":	"0x01000008"
+			"id":	"0x03000009"
 		}, {
 			"type":	"media",
 			"name":	"checked",
-			"id":	"0x01000009"
+			"id":	"0x0300000A"
 		}, {
 			"type":	"media",
 			"name":	"equal",
-			"id":	"0x0100000A"
+			"id":	"0x0300000B"
 		}, {
 			"type":	"media",
 			"name":	"ic_back",
-			"id":	"0x0100000B"
+			"id":	"0x0300000C"
 		}, {
 			"type":	"media",
 			"name":	"ic_cal_delete",
-			"id":	"0x0100000C"
+			"id":	"0x0300000D"
 		}, {
 			"type":	"media",
 			"name":	"ic_cal_delete_c",
-			"id":	"0x0100000D"
+			"id":	"0x0300000E"
 		}, {
 			"type":	"media",
 			"name":	"ic_cal_division",
-			"id":	"0x0100000E"
+			"id":	"0x0300000F"
 		}, {
 			"type":	"media",
 			"name":	"ic_cal_eight",
-			"id":	"0x0100000F"
+			"id":	"0x03000010"
 		}, {
 			"type":	"media",
 			"name":	"ic_cal_equal",
-			"id":	"0x01000010"
+			"id":	"0x03000011"
 		}, {
 			"type":	"media",
 			"name":	"ic_cal_five",
-			"id":	"0x01000011"
+			"id":	"0x03000012"
 		}, {
 			"type":	"media",
 			"name":	"ic_cal_four",
-			"id":	"0x01000012"
+			"id":	"0x03000013"
 		}, {
 			"type":	"media",
 			"name":	"ic_cal_ln",
-			"id":	"0x01000013"
+			"id":	"0x03000014"
 		}, {
 			"type":	"media",
 			"name":	"ic_cal_minus",
-			"id":	"0x01000014"
+			"id":	"0x03000015"
 		}, {
 			"type":	"media",
 			"name":	"ic_cal_multiply",
-			"id":	"0x01000015"
+			"id":	"0x03000016"
 		}, {
 			"type":	"media",
 			"name":	"ic_cal_nine",
-			"id":	"0x01000016"
+			"id":	"0x03000017"
 		}, {
 			"type":	"media",
 			"name":	"ic_cal_one",
-			"id":	"0x01000017"
+			"id":	"0x03000018"
 		}, {
 			"type":	"media",
 			"name":	"ic_cal_percent",
-			"id":	"0x01000018"
+			"id":	"0x03000019"
 		}, {
 			"type":	"media",
 			"name":	"ic_cal_pi",
-			"id":	"0x01000019"
+			"id":	"0x0300001A"
 		}, {
 			"type":	"media",
 			"name":	"ic_cal_plus",
-			"id":	"0x0100001A"
+			"id":	"0x0300001B"
 		}, {
 			"type":	"media",
 			"name":	"ic_cal_point",
-			"id":	"0x0100001B"
+			"id":	"0x0300001C"
 		}, {
 			"type":	"media",
 			"name":	"ic_cal_seven",
-			"id":	"0x0100001C"
+			"id":	"0x0300001D"
 		}, {
 			"type":	"media",
 			"name":	"ic_cal_six",
-			"id":	"0x0100001D"
+			"id":	"0x0300001E"
 		}, {
 			"type":	"media",
 			"name":	"ic_cal_sqrt",
-			"id":	"0x0100001E"
+			"id":	"0x0300001F"
 		}, {
 			"type":	"media",
 			"name":	"ic_cal_three",
-			"id":	"0x0100001F"
+			"id":	"0x03000020"
 		}, {
 			"type":	"media",
 			"name":	"ic_cal_two",
-			"id":	"0x01000020"
+			"id":	"0x03000021"
 		}, {
 			"type":	"media",
 			"name":	"ic_cal_zero",
-			"id":	"0x01000021"
+			"id":	"0x03000022"
 		}, {
 			"type":	"media",
 			"name":	"ic_hop",
-			"id":	"0x01000022"
+			"id":	"0x03000023"
 		}, {
 			"type":	"media",
 			"name":	"ic_hop_normal",
-			"id":	"0x01000023"
+			"id":	"0x03000024"
 		}, {
 			"type":	"media",
 			"name":	"icon",
-			"id":	"0x01000024"
+			"id":	"0x03000025"
 		}, {
 			"type":	"media",
 			"name":	"uncheck",
-			"id":	"0x01000025"
+			"id":	"0x03000026"
 		}, {
 			"type":	"profile",
 			"name":	"form_config",
-			"id":	"0x01000026"
+			"id":	"0x03000027"
 		}, {
 			"type":	"profile",
 			"name":	"main_pages",
-			"id":	"0x01000027"
+			"id":	"0x03000028"
 		}]
 }

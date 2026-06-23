@@ -319,7 +319,7 @@ class CardCalc extends ViewPU {
             });
         }, Button);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Image.create({ "id": 16777232, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" });
+            Image.create({ "id": 50331665, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" });
             Image.width(40);
             Image.height(40);
             Image.objectFit(ImageFit.Contain);
@@ -370,41 +370,41 @@ interface ImageList {
 }
 function calcButton1(): Array<ImageList> {
     let list: Array<ImageList> = [
-        { image: { "id": 16777246, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: 'sqrt' },
-        { image: { "id": 16777229, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: 'C' },
-        { image: { "id": 16777230, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '/' },
-        { image: { "id": 16777237, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '*' },
-        { image: { "id": 16777228, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '' },
+        { image: { "id": 50331679, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: 'sqrt' },
+        { image: { "id": 50331662, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: 'C' },
+        { image: { "id": 50331663, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '/' },
+        { image: { "id": 50331670, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '*' },
+        { image: { "id": 50331661, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '' },
     ];
     return list;
 }
 function calcButton2(): Array<ImageList> {
     let list: Array<ImageList> = [
-        { image: { "id": 16777235, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: 'ln' },
-        { image: { "id": 16777244, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '7' },
-        { image: { "id": 16777231, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '8' },
-        { image: { "id": 16777238, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '9' },
-        { image: { "id": 16777236, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '-' },
+        { image: { "id": 50331668, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: 'ln' },
+        { image: { "id": 50331677, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '7' },
+        { image: { "id": 50331664, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '8' },
+        { image: { "id": 50331671, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '9' },
+        { image: { "id": 50331669, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '-' },
     ];
     return list;
 }
 function calcButton3(): Array<ImageList> {
     let list: Array<ImageList> = [
-        { image: { "id": 16777241, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: 'pi' },
-        { image: { "id": 16777234, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '4' },
-        { image: { "id": 16777233, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '5' },
-        { image: { "id": 16777245, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '6' },
-        { image: { "id": 16777242, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '+' },
+        { image: { "id": 50331674, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: 'pi' },
+        { image: { "id": 50331667, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '4' },
+        { image: { "id": 50331666, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '5' },
+        { image: { "id": 50331678, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '6' },
+        { image: { "id": 50331675, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '+' },
     ];
     return list;
 }
 function calcButton4(): Array<ImageList> {
     let list: Array<ImageList> = [
-        { image: { "id": 16777239, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '1' },
-        { image: { "id": 16777248, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '2' },
-        { image: { "id": 16777247, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '3' },
-        { image: { "id": 16777249, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '0' },
-        { image: { "id": 16777243, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '.' },
+        { image: { "id": 50331672, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '1' },
+        { image: { "id": 50331681, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '2' },
+        { image: { "id": 50331680, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '3' },
+        { image: { "id": 50331682, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '0' },
+        { image: { "id": 50331676, "type": 20000, params: [], "bundleName": "com.samples.arktscalc", "moduleName": "entry" }, value: '.' },
     ];
     return list;
 }

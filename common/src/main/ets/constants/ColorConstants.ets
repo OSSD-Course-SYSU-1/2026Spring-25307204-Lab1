@@ -1,0 +1,36 @@
+export const COLORS = {
+  PRIMARY: '#007DFF',
+  SECONDARY: '#FF9500',
+  DARK: '#333333',
+  GRAY: '#505050',
+  LIGHT_GRAY: '#F5F5F5',
+  WHITE: '#FFFFFF',
+  ERROR: '#FF0000',
+  SUCCESS: '#00C853',
+  
+  BUTTON: {
+    OPERATOR: '#FF9500',
+    NUMBER: '#333333',
+    FUNCTION: '#505050',
+    EQUAL: '#007DFF',
+    CLEAR: '#FF3B30'
+  },
+  
+  TEXT: {
+    PRIMARY: '#333333',
+    SECONDARY: '#666666',
+    LIGHT: '#999999',
+    WHITE: '#FFFFFF'
+  },
+  
+  DISPLAY: {
+    BACKGROUND: '#FFFFFF',
+    EXPRESSION: '#333333',
+    RESULT: '#007DFF'
+  },
+  
+  ANGLE_MODE: {
+    DEG: '#007DFF',
+    RAD: '#FF9500'
+  }
+};

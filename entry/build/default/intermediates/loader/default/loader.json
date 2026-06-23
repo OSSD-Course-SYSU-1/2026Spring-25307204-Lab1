@@ -1,6 +1,8 @@
 {
   "modulePathMap": {
-    "entry": "E:\\OSSD\\calculator-master\\entry"
+    "entry": "E:\\OSSD\\calculator-master\\entry",
+    "common": "E:\\OSSD\\calculator-master\\common",
+    "crossplatform": "E:\\OSSD\\calculator-master\\crossplatform"
   },
   "compileMode": "esmodule",
   "projectRootPath": "E:\\OSSD\\calculator-master",

@@ -1,0 +1,14 @@
+node_modules/
+build/
+dist/
+.hvigor/
+.idea/
+.arts/
+.codeartsdoer/
+coverage/
+*.log
+.DS_Store
+*.hap
+*.tmp
+.env
+.vscode/

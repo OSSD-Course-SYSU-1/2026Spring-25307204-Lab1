@@ -71,6 +71,96 @@
     },
     "BUILD_CACHE_DIR": ""
   },
+  "ohos-module-common": {
+    "SELECT_TARGET": "default",
+    "MODULE_BUILD_DIR": "E:\\OSSD\\calculator-master\\common\\build",
+    "TARGETS": {
+      "default": {
+        "SOURCE_ROOT": "E:\\OSSD\\calculator-master\\common\\src\\main",
+        "RESOURCES_PATH": [
+          "E:\\OSSD\\calculator-master\\common\\src\\main\\resources"
+        ],
+        "BUILD_PATH": {
+          "OUTPUT_PATH": "E:\\OSSD\\calculator-master\\common\\build\\default\\outputs\\default",
+          "INTERMEDIA_PATH": "E:\\OSSD\\calculator-master\\common\\build\\default\\intermediates",
+          "JS_ASSETS_PATH": "E:\\OSSD\\calculator-master\\common\\build\\default\\intermediates\\loader_out\\default",
+          "JS_LITE_ASSETS_PATH": "E:\\OSSD\\calculator-master\\common\\build\\default\\intermediates\\loader_out_lite\\default",
+          "RES_PATH": "E:\\OSSD\\calculator-master\\common\\build\\default\\intermediates\\res\\default",
+          "RES_PROFILE_PATH": "E:\\OSSD\\calculator-master\\common\\build\\default\\intermediates\\res\\default\\resources\\base\\profile",
+          "ETS_SUPER_VISUAL_PATH": "E:\\OSSD\\calculator-master\\common\\build\\default\\cache\\default\\default@HarCompileArkTS\\esmodule",
+          "JS_SUPER_VISUAL_PATH": "E:\\OSSD\\calculator-master\\common\\build\\default\\cache\\default\\default@HarCompileJS\\jsbundle",
+          "WORKER_LOADER": "E:\\OSSD\\calculator-master\\common\\build\\default\\intermediates\\loader\\default\\loader.json",
+          "MANIFEST_JSON": "E:\\OSSD\\calculator-master\\common\\build\\default\\intermediates\\manifest\\default",
+          "OUTPUT_METADATA_JSON": "E:\\OSSD\\calculator-master\\common\\build\\default\\intermediates\\hap_metadata\\default\\output_metadata.json",
+          "SOURCE_MAP_DIR": "E:\\OSSD\\calculator-master\\common\\build\\default\\intermediates\\source_map\\default"
+        },
+        "BUILD_OPTION": {
+          "debuggable": true
+        }
+      }
+    },
+    "BUILD_OPTION": {
+      "default-default": {
+        "debuggable": true,
+        "copyFrom": "default"
+      }
+    },
+    "BUILD_PROFILE_OPT": {
+      "apiType": "stageMode",
+      "buildOption": {},
+      "targets": [
+        {
+          "name": "default"
+        }
+      ]
+    },
+    "BUILD_CACHE_DIR": ""
+  },
+  "ohos-module-crossplatform": {
+    "SELECT_TARGET": "default",
+    "MODULE_BUILD_DIR": "E:\\OSSD\\calculator-master\\crossplatform\\build",
+    "TARGETS": {
+      "default": {
+        "SOURCE_ROOT": "E:\\OSSD\\calculator-master\\crossplatform\\src\\main",
+        "RESOURCES_PATH": [
+          "E:\\OSSD\\calculator-master\\crossplatform\\src\\main\\resources"
+        ],
+        "BUILD_PATH": {
+          "OUTPUT_PATH": "E:\\OSSD\\calculator-master\\crossplatform\\build\\default\\outputs\\default",
+          "INTERMEDIA_PATH": "E:\\OSSD\\calculator-master\\crossplatform\\build\\default\\intermediates",
+          "JS_ASSETS_PATH": "E:\\OSSD\\calculator-master\\crossplatform\\build\\default\\intermediates\\loader_out\\default",
+          "JS_LITE_ASSETS_PATH": "E:\\OSSD\\calculator-master\\crossplatform\\build\\default\\intermediates\\loader_out_lite\\default",
+          "RES_PATH": "E:\\OSSD\\calculator-master\\crossplatform\\build\\default\\intermediates\\res\\default",
+          "RES_PROFILE_PATH": "E:\\OSSD\\calculator-master\\crossplatform\\build\\default\\intermediates\\res\\default\\resources\\base\\profile",
+          "ETS_SUPER_VISUAL_PATH": "E:\\OSSD\\calculator-master\\crossplatform\\build\\default\\cache\\default\\default@HarCompileArkTS\\esmodule",
+          "JS_SUPER_VISUAL_PATH": "E:\\OSSD\\calculator-master\\crossplatform\\build\\default\\cache\\default\\default@HarCompileJS\\jsbundle",
+          "WORKER_LOADER": "E:\\OSSD\\calculator-master\\crossplatform\\build\\default\\intermediates\\loader\\default\\loader.json",
+          "MANIFEST_JSON": "E:\\OSSD\\calculator-master\\crossplatform\\build\\default\\intermediates\\manifest\\default",
+          "OUTPUT_METADATA_JSON": "E:\\OSSD\\calculator-master\\crossplatform\\build\\default\\intermediates\\hap_metadata\\default\\output_metadata.json",
+          "SOURCE_MAP_DIR": "E:\\OSSD\\calculator-master\\crossplatform\\build\\default\\intermediates\\source_map\\default"
+        },
+        "BUILD_OPTION": {
+          "debuggable": true
+        }
+      }
+    },
+    "BUILD_OPTION": {
+      "default-default": {
+        "debuggable": true,
+        "copyFrom": "default"
+      }
+    },
+    "BUILD_PROFILE_OPT": {
+      "apiType": "stageMode",
+      "buildOption": {},
+      "targets": [
+        {
+          "name": "default"
+        }
+      ]
+    },
+    "BUILD_CACHE_DIR": ""
+  },
   "ohos-project": {
     "SELECT_PRODUCT_NAME": "default",
     "MODULE_BUILD_DIR": "E:\\OSSD\\calculator-master\\build",
@@ -84,6 +174,32 @@
       {
         "name": "entry",
         "srcPath": "E:\\OSSD\\calculator-master\\entry",
+        "targets": [
+          {
+            "name": "default",
+            "applyToProducts": [
+              "default"
+            ]
+          }
+        ],
+        "belongProjectPath": "E:\\OSSD\\calculator-master"
+      },
+      {
+        "name": "common",
+        "srcPath": "E:\\OSSD\\calculator-master\\common",
+        "targets": [
+          {
+            "name": "default",
+            "applyToProducts": [
+              "default"
+            ]
+          }
+        ],
+        "belongProjectPath": "E:\\OSSD\\calculator-master"
+      },
+      {
+        "name": "crossplatform",
+        "srcPath": "E:\\OSSD\\calculator-master\\crossplatform",
         "targets": [
           {
             "name": "default",
@@ -112,6 +228,30 @@
         {
           "name": "entry",
           "srcPath": "./entry",
+          "targets": [
+            {
+              "name": "default",
+              "applyToProducts": [
+                "default"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "common",
+          "srcPath": "./common",
+          "targets": [
+            {
+              "name": "default",
+              "applyToProducts": [
+                "default"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "crossplatform",
+          "srcPath": "./crossplatform",
           "targets": [
             {
               "name": "default",

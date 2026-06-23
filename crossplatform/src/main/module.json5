@@ -1,0 +1,12 @@
+{
+  "module": {
+    "name": "crossplatform",
+    "type": "har",
+    "description": "跨平台UI层 - UI组件",
+    "deviceTypes": [
+      "phone",
+      "tablet",
+      "2in1"
+    ]
+  }
+}

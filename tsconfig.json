@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "target": "ES2021",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "outDir": "./dist",
+    "rootDir": "./",
+    "resolveJsonModule": true,
+    "lib": ["ES2021", "DOM"]
+  },
+  "include": [
+    "common/**/*.ts",
+    "common/**/*.ets",
+    "crossplatform/**/*.ts",
+    "crossplatform/**/*.ets"
+  ],
+  "exclude": [
+    "node_modules",
+    "build",
+    "dist",
+    ".hvigor"
+  ]
+}
